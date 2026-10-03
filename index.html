@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Conversational infill: a small Talker model responds instantly while a slower Reasoner streams in knowledge, for responsive and intelligent voice agents.">
+  <meta property="og:title" content="Thinking While Speaking: Inference-Time Knowledge Transfer for Responsive and Intelligent Conversational Voice Agents"/>
+  <meta property="og:description" content="A small Talker model hides the latency of a slower Reasoner and fluently integrates its streamed knowledge, closing the accuracy gap to within 6.3% of the frontier Reasoner."/>
+  <!-- TODO: set og:url and add static/images/banner.png (1200x630) -->
+  <meta property="og:image" content="static/images/banner.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+  <meta name="twitter:title" content="Thinking While Speaking: Inference-Time Knowledge Transfer for Responsive and Intelligent Conversational Voice Agents">
+  <meta name="twitter:description" content="ConvFill: conversational infill for responsive and intelligent voice agents.">
+  <meta name="twitter:image" content="static/images/banner.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="keywords" content="voice agents, conversational infill, small language models, latency, ConvFill">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Thinking While Speaking: Inference-Time Knowledge Transfer for Responsive and Intelligent Conversational Voice Agents</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Thinking While Speaking: Inference-Time Knowledge Transfer for Responsive and Intelligent Conversational Voice Agents</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors (TODO: add personal links) -->
+              <span class="author-block">
+                <a href="#" target="_blank">Vidya Srinivas</a><sup>1*</sup>,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Zachary Englhardt</a><sup>1*</sup>,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Vikram Iyer</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Shwetak Patel</a><sup>1</sup></span>
+            </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <!-- TODO: confirm affiliation -->
+                    <span class="author-block"><sup>1</sup>University of Washington</span>
+                    <span class="eql-cntrb"><small><br><sup>*</sup>Equal contribution</small></span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+
+                      <!-- ArXiv abstract Link -->
+                      <span class="link-block">
+                        <a href="https://arxiv.org/abs/2511.07397" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                          <span class="icon">
+                            <i class="ai ai-arxiv"></i>
+                          </span>
+                          <span>Paper</span>
+                        </a>
+                      </span>
+
+                      <!-- Data link -->
+                      <span class="link-block">
+                        <a href="https://huggingface.co/datasets/zenglhardt/convfill-dataset" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                          <span class="icon">
+                            <i class="fas fa-database"></i>
+                          </span>
+                          <span>Data</span>
+                        </a>
+                      </span>
+
+                      <!-- Github link -->
+                      <span class="link-block">
+                        <a href="https://github.com/vysri/conversational-infill" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                          <span class="icon">
+                            <i class="fab fa-github"></i>
+                          </span>
+                          <span>Code</span>
+                        </a>
+                      </span>
+
+                      <!-- Models link -->
+                      <span class="link-block">
+                        <a href="https://huggingface.co/collections/vysri/convfill-inference-time-knowledge-transfer" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                          <span class="icon">
+                            <i class="fas fa-cube"></i>
+                          </span>
+                          <span>Models</span>
+                        </a>
+                      </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- News & Updates -->
+<section class="section hero is-small">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">News & Updates</h2>
+        <div class="content has-text-justified">
+          <ul>
+            <!-- TODO: edit these -->
+            <li>The paper has been revised on arXiv (v3, July 2026).</li>
+            <li>We released the ConvFill code, the 290,571-example dataset, and seven fine-tuned Talker models (135M&ndash;1.7B parameters).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End News & Updates -->
+
+<!-- Paper TLDR -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">TLDR</h2>
+        <div class="content has-text-justified">
+          <p>
+            Voice agents have to be fast <i>and</i> smart, but reasoning, tool use, and retrieval are slow. We introduce <b>conversational infill</b>, where a small on-device Talker model <span style="background-color: #e6d2fa"> responds immediately to hide the latency of a slower Reasoner</span>, then <span style="background-color: #f8e69d"> fluently weaves the Reasoner's streamed knowledge into its speech</span>. Our system, ConvFill, maintains <b>millisecond-level time-to-first-response</b> while staying within <b>6.3%</b> of the frontier Reasoner's accuracy.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper TLDR -->
+
+
+<!-- Teaser figure -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body" style="padding-top:2rem; padding-bottom:1rem;">
+      <div class="columns is-centered">
+        <div class="column is-4">
+          <img src="static/images/convfill-teaser.png" alt="Conversational infill: (A) the Talker and Reasoner system and (B) an example conversation" style="max-width:100%; height:auto;">
+        </div>
+        <div class="column is-7 is-flex is-align-items-center is-justify-content-center" style="display: flex; flex-direction: column; justify-content: center;">
+          <div class="content">
+            <p><b>Conversational infill.</b> (A) A lightweight Talker model (red) immediately starts responding while a Reasoner model (blue) performs higher-latency reasoning and tool calls. When the Reasoner responds, the Talker incorporates this information into subsequent responses (purple). (B) A conversation turn showing user speech, Talker response, and the background Reasoner inference progression. The third response phrase (purple) is conditioned on Reasoner context.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End teaser figure -->
+
+
+<!-- Teaser video (TODO: add static/videos/convfill_demo.mp4 and uncomment)
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video poster="" id="tree" autoplay controls muted loop height="100%">
+        <source src="static/videos/convfill_demo.mp4"
+        type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        An example ConvFill interaction: the Talker starts speaking immediately while the Reasoner works in the background.
+      </h2>
+    </div>
+  </div>
+</section>
+End teaser video -->
+
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <!-- DRAFT: paraphrased from the paper; replace with the arXiv abstract if you want it verbatim -->
+          <p>
+            Voice agents face a fundamental tension. The reasoning, retrieval, and tool use that make foundation models capable are iterative and slow, while conversation demands responses on a millisecond timescale. Small real-time models meet the latency bar but cannot match foundation models on complex tasks, leaving current voice agents to trade away either responsiveness or capability. We introduce conversational infill, in which a small Talker model both immediately generates contextually grounded responses to hide the latency of an external Reasoner model and fluently integrates streamed Reasoner knowledge into its responses during inference. We curate a 290,571-example synthetic dataset spanning six domains and show that the task is learnable across seven widely used small language models ranging from 135M to 1.7B parameters. Our system, ConvFill, sustains millisecond-level time-to-first-response while closing the accuracy gap to within 6.3% of the corresponding frontier Reasoner. In a live user study on Apple M2 hardware (n=18), participants rated ConvFill on par with frontier models overall, preferred it for retrieval tasks, and ranked it significantly more responsive.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+<!-- Reasoner -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Reasoner: the knowledge source</h2>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <figure>
+            <img src="static/images/reasoner-knowledge-source.png" alt="Reasoner inputs and outputs" style="max-width:100%; height:auto;">
+            <figcaption style="margin-left:0px; margin-right:2px">The Reasoner (a frontier model) sees the full conversation transcript and the latest user utterance, can call tools, the web, and data sources, and pushes knowledge chunks into the knowledge queue.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-12">
+          <div class="content has-text-justified">
+            <p>At every turn, the Reasoner sees the <span style="background-color: #f8f7a6">full conversation history</span> from previous turns along with the most recent user utterance. Because it has complete access to the history at inference time, it can ground its responses in the conversational context and stay consistent with earlier references.</p>
+            <p>The Reasoner does not have to respect real-time constraints. Instead, it produces <span style="background-color: #d0e4fa">concise knowledge chunks</span> whenever it is ready. Each chunk is a semantically complete phrase, which is then passed on to the rest of the system.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End reasoner -->
+
+
+<!-- Talker -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Talker: dynamic information incorporation</h2>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <figure>
+            <img src="static/images/talker-dynamic-info.png" alt="Talker inputs and outputs" style="max-width:100%; height:auto;">
+            <figcaption style="margin-left:0px; margin-right:2px">The Talker takes a lookback of the last &#8467; turns, the user utterance, its previous phrases this turn, and either Reasoner knowledge or a silence token (&lt;sil&gt;). On &lt;sil&gt; it produces a contextual conversational filler phrase; otherwise it produces a Reasoner-conditioned phrase.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-12">
+          <div class="content has-text-justified">
+            <p>Unlike the Reasoner, the Talker does <i>not</i> see the full conversation. Instead, it receives <span style="background-color: #f8f7a6">a configurable buffer of the last <i>L</i> turns</span>. This is enough context to stay consistent with pronoun references from the previous turn, which prevents hallucination, while keeping time-to-first-response (TTFR) low.</p>
+            <p>At the end of the prompt, the Talker sees the latest user utterance and the phrases it has already spoken during the current turn. On each inference it is passed <span style="background-color: #f8f7a6">only one Reasoner knowledge chunk</span>. This lets the Talker focus on one thing at a time, which is important for incorporating Reasoner knowledge faithfully, especially for Talker models with fewer than 1B parameters.</p>
+            <p>Finally, we train the Talker to handle both the presence and the absence of Reasoner knowledge. If the pipeline sends a <span style="background-color: #fbc8d0">silence token</span>, meaning the Reasoner is still generating, the Talker produces a <span style="background-color: #fbc8d0">contextual filler phrase</span>. If it receives a knowledge chunk, it produces a <span style="background-color: #d0e4fa">Reasoner-conditioned phrase</span> that stays consistent with what it has already said.</p>
+            <p>The takeaway here is that the Talker only has focus on <b>information incorporation and conversational flow</b>. It never has to worry about retrieving external information or doing the reasoning itself.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End talker -->
+
+
+<!-- Architecture -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">The ConvFill architecture: putting it all together</h2>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <figure>
+            <img src="static/images/convfill-architecture.png" alt="ConvFill system architecture" style="max-width:100%; height:auto;">
+            <figcaption style="margin-left:0px; margin-right:2px">User speech is transcribed (STT) and sent to both the Talker and the Reasoner. (1) The Reasoner pushes knowledge into the knowledge queue; the Talker reads a &lt;sil&gt; token or a knowledge chunk from it. (2) The Talker writes filler and Reasoner-conditioned phrases to the TTS queue, which are spoken as system speech.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-12">
+          <div class="content has-text-justified">
+            <p>ConvFill puts the Talker and the Reasoner together using <b>two queues</b>. The first, the <span style="background-color: #f8f7a6">knowledge queue</span>, buffers information from the Reasoner until the Talker is ready to ingest it. The second, the <span style="background-color: #f8f7a6">TTS queue</span>, holds Talker responses that have been generated but not yet spoken aloud.</p>
+            <p>A single Talker response consists of multiple phrases, some of which are <span style="background-color: #d0e4fa">Reasoner-conditioned (blue)</span> and some of which are <span style="background-color: #fbc8d0">contextual fillers (red)</span>. We calibrate the system so that whenever Reasoner knowledge is present, it always takes priority over contextual fillers, ensuring that the user gets relevant information as soon as possible.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End architecture -->
+
+
+<!-- Dataset -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">How we created the ConvFill dataset</h2>
+
+      <div class="columns is-centered">
+        <div class="column is-12">
+          <div class="content has-text-justified">
+            <p>The ConvFill dataset contains <span style="background-color: #f8f7a6">8,443 conversations yielding 290,571 training examples</span>: 111,552 silence-based filler examples and 179,019 knowledge-grounded examples, in JSONL format. Each conversation is a list of turns, and each turn pairs a user utterance with a <i>thoughts</i> array (what the Reasoner would provide, with <span style="background-color: #fbc8d0">&lt;sil&gt;</span> placeholders where it has not yet produced anything) and a <i>response</i> array (the Talker's spoken phrases). Phrases aligned to a <span style="background-color: #fbc8d0">&lt;sil&gt;</span> are contextual fillers; phrases aligned to Reasoner content are <span style="background-color: #d0e4fa">knowledge-conditioned</span>.</p>
+
+            <h3 class="title is-4">Seed stage</h3>
+          </div>
+        </div>
+      </div>
+      <div class="columns is-centered" style="margin-top:-1.25rem;">
+        <div class="column is-8">
+          <figure>
+            <img src="static/images/initial-seed-data.png" alt="Initial data seed stage: conversational topic seeds, persona-scenario pairs, and the DSTC8 train split" style="max-width:100%; height:auto;">
+            <figcaption style="margin-left:0px; margin-right:2px">The initial data seed stage draws on three sources: conversational topic seeds (advice, assistant, planning), &lt;persona, scenario&gt; pairs (customer service, education, medical), and the DSTC8 train split of goal-directed, slot-filling utterances.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-12">
+          <div class="content has-text-justified">
+            <p>We build our dataset in two parts. The first part is <b>topic-seeded</b> across six domains: general advice, assistant queries, event planning, customer service, education, and medicine. To increase diversity, we first create <span style="background-color: #f8f7a6">1,000 unique conversation premise seeds per domain</span>. Each conversation then follows a template of <b>7&ndash;10 turns with 0&ndash;3 &lt;sil&gt; placeholders per turn</b>.</p>
+            <p>The second part <span style="background-color: #f8f7a6">grounds conversations in realistic use cases using task-oriented dialogues from <b>DSTC8</b></span>: we keep the labeled user utterances and use the labeled system responses as the contents of the Reasoner thoughts array, padded with &lt;sil&gt; placeholders at the start of each turn. Talker responses are then generated conditioned on this array.</p>
+
+            <h3 class="title is-4">A four-stage validation cascade</h3>
+            <p>Even with heavily tuned prompts, frontier LLMs still make subtle errors, such as referencing future contents of the thoughts array in an earlier response phrase. To keep these from contaminating training, we <span style="background-color: #f8f7a6">iteratively re-generate each conversation until it passes a strict four-stage validator</span>.</p>
+          </div>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-10">
+          <figure>
+            <img src="static/images/data-generation-pipeline.png" alt="ConvFill data generation pipeline: seed stage, four validation stages, JSON output" style="max-width:100%; height:auto;">
+            <figcaption style="margin-left:0px; margin-right:2px">The full ConvFill data generation pipeline. Candidate conversations must pass all four validation stages before being written out as JSON with paired Reasoner and Talker fields.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-12">
+          <div class="content has-text-justified">
+            <ol>
+              <li><b>Structural validation.</b> Candidates are parsed to verify that they contain the right number of turns and that matching Talker and Reasoner phrase pairs are present.</li>
+              <li><b>NLI semantic validation.</b> A DeBERTaV3 model fine-tuned on MNLI checks that each grounded phrase pair exhibits <i>entailment</i>, i.e., the Talker's phrase is supported by the Reasoner's.</li>
+              <li><b>BERTScore alignment validation.</b> We compute pairwise BERTScore between every entry of the thoughts array and every entry of the response array in each turn, and require each entry to relate most strongly to its temporally aligned partner. This catches ordering errors, <span style="background-color: #f8f7a6">specifically those involving staggered turns</span>.</li>
+              <li><b>Scaffold-preservation checks.</b> No proper noun may appear in a response before it first appears in the user utterance or the thoughts array, which prevents entity hallucination.</li>
+            </ol>
+            </div>
+          <nav class="level" style="margin-top:2rem;">
+            <div class="level-item has-text-centered" style="flex: 1 1 0;">
+              <div>
+                <p style="color:#1f3a5f;">Conversations generated:</p>
+                <p class="title is-3">131,711</p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered" style="flex: 1 1 0;">
+              <div>
+                <p style="color:#1f3a5f;">Passed validation:</p>
+                <p class="title is-3">8,443</p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered" style="flex: 1 1 0;">
+              <div>
+                <p style="color:#1f3a5f;">Pass rate:</p>
+                <p class="title is-3">~6.4%</p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered" style="flex: 1 1 0;">
+              <div>
+                <p style="color:#1f3a5f;">Total training examples:</p>
+                <p class="title is-3">290,571</p>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End dataset -->
+
+
+<!-- Configurations -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Our Talker and Reasoner configurations</h2>
+      <div class="columns is-centered">
+        <div class="column is-7">
+          <figure>
+            <img src="static/images/convfill-configurations.png" alt="Seven fine-tuned Talker models, three prompted Reasoner models, and 21 ConvFill configurations across 4 Talker and 3 Reasoner families" style="max-width:85%; height:auto;">
+          </figure>
+        </div>
+        <div class="column is-5 is-flex is-align-items-center is-justify-content-center" style="display: flex; flex-direction: column; justify-content: center;">
+          <div class="content">
+            <p>We fine-tune <span style="background-color: #f8f7a6">7 Talker models (135M&ndash;1.7B parameters)</span> for the conversational infill Talker task, spanning 4 model families.</p>
+            <p>We prompt <span style="background-color: #f8f7a6">3 frontier models</span> for the conversational infill Reasoner task: Claude Opus 4.7, GPT-5.5, and Gemini 3.1 Pro.</p>
+            <p>Pairing every Talker with every Reasoner gives <b>21 ConvFill configurations</b> across 4 Talker and 3 Reasoner families, which we evaluate for performance. We also evaluate a subset of these configurations in a live, multi-turn interaction setting.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End configurations -->
+
+
+<!-- Accuracy -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">How well does ConvFill perform?</h2>
+      <div class="columns is-centered">
+        <div class="column is-7">
+          <figure>
+            <img src="static/images/convfill-singleturn-qa-results.png" alt="Single-turn QA accuracy of seven Talker models on LLAMA1 and SimpleQA with Claude Opus 4.7, GPT-5.5, and Gemini 3.1 Pro as Reasoners" style="max-width:85%; height:auto;">
+            <figcaption style="margin-right:20px;">Single-turn QA accuracy on LLAMA1 and SimpleQA for seven Talker models, with Claude Opus 4.7, GPT-5.5, and Gemini 3.1 Pro as the Reasoner backends. Blue bars show the base SLM performance alone. Gray bars show the additional performance boost by ConvFill Talkers over their respective Base SLMs. Horizontal blue lines mark the Frontier Model performance alone, agnostic of ConvFill. Red dashed lines represent the performance of the ConvFill Reasoners, prompted for the ConvFill task. Error bars show 95% confidence intervals.</figcaption>
+          </figure>
+        </div>
+        <div class="column is-5 is-flex is-align-items-center is-justify-content-center" style="display: flex; flex-direction: column; justify-content: center;">
+          <div class="content">
+            <p>Our results show that a Talker can faithfully incorporate Reasoner knowledge. End-to-end, ConvFill <span style="background-color: #f8f7a6">approaches frontier-model-only accuracy on QA tasks</span>. Because the Reasoner's knowledge chunks are what  the Talker sees, each Reasoner's accuracy acts as a ceiling for its Talker. Consistently across both datasets evaluated, ConvFill Talkers land <span style="background-color: #f8f7a6">within 0&ndash;6.3% of their corresponding Reasoner</span>.</p>
+            <p>Compared with the base SLMs they start from, ConvFill Talkers show relative gains of <span style="background-color: #f8f7a6">as much as 51% on LLAMA1 and 63.4% on SimpleQA</span>, across all of the Reasoners we tested. Small models that would struggle to answer these questions on their own can answer them well guided by Reasoner knowledge.</p>
+            <p>On both QA datasets, base SLM accuracy rises significantly with parameter count, so larger models have stronger question-answering ability before ConvFill is added. On the more challenging SimpleQA dataset, the benefit of scale shows up more clearly. <span style="background-color: #f8f7a6">Model size meaningfully improves response quality when the task puts real demands on the model.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End accuracy -->
+
+
+<!-- Beyond accuracy -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Evaluating beyond accuracy: did ConvFill actually do what we wanted?</h2>
+      <div class="columns">
+        <div class="column is-6 is-flex is-align-items-center is-justify-content-center" style="display: flex; flex-direction: column; justify-content: center;">
+          <div class="content">
+            <p>Accuracy alone does not tell us whether the Talker is a good conversational partner. <span style="background-color: #f8f7a6">A response can contain the right answer and still say something false or unhelpful, or it can sound fine without ever giving the answer.</span> So in addition to accuracy, we score each response on three LLM-as-a-Judge criteria (1-5):</p>
+            <ul>
+              <li><b>Coverage:</b> does the response contain the correct answer?</li>
+              <li><b>Faithfulness:</b> does it stay faithful to the Reasoner's knowledge, without adding claims that are not supported?</li>
+              <li><b>Helpfulness:</b> does the response actually provide an answer to the user's question?</li>
+            </ul>
+            <p>The examples on the right show how a response can pass one of these checks and still fail another.</p>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="notification" style="background-color:#d9d9d9; padding:0.6rem 1rem; margin-bottom:0.6rem;"><b>User:</b> &ldquo;What is the price of the Hilton Hotel Seattle for tonight?&rdquo;</div>
+          <div class="notification" style="background-color:#d5ecc9; padding:0.6rem 1rem; margin-bottom:1rem;"><b>Well-formed answer:</b> It costs $150 per night</div>
+          <table class="table" style="background-color:transparent; width:100%;">
+            <thead>
+              <tr>
+                <th>Contain the correct answer</th>
+                <th class="has-text-centered">Coverage</th>
+                <th class="has-text-centered">Faithfulness</th>
+                <th class="has-text-centered">Helpfulness</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="background-color:#f4cccc; border:1px solid #d9777a; vertical-align:middle;">&ldquo;The cost is not free&rdquo;</td>
+                <td class="has-text-centered" style="vertical-align:middle;"><span style="color:#b01e1e; font-size:1.4rem;">&#10007;</span></td>
+                <td class="has-text-centered" style="vertical-align:middle;"><span style="color:#3b7a2a; font-size:1.4rem;">&#10003;</span></td>
+                <td class="has-text-centered" style="vertical-align:middle;"><span style="color:#3b7a2a; font-size:1.4rem;">&#10003;</span></td>
+              </tr>
+              <tr>
+                <td style="background-color:#f4cccc; border:1px solid #d9777a; vertical-align:middle;">&ldquo;It is $150 and at the top of Mt. Fuji&rdquo;</td>
+                <td class="has-text-centered" style="vertical-align:middle;"><span style="color:#3b7a2a; font-size:1.4rem;">&#10003;</span></td>
+                <td class="has-text-centered" style="vertical-align:middle;"><span style="color:#b01e1e; font-size:1.4rem;">&#10007;</span></td>
+                <td class="has-text-centered" style="vertical-align:middle;"><span style="color:#3b7a2a; font-size:1.4rem;">&#10003;</span></td>
+              </tr>
+              <tr>
+                <td style="background-color:#f4cccc; border:1px solid #d9777a; vertical-align:middle;">&ldquo;$150 is a lot of money&rdquo;</td>
+                <td class="has-text-centered" style="vertical-align:middle;"><span style="color:#3b7a2a; font-size:1.4rem;">&#10003;</span></td>
+                <td class="has-text-centered" style="vertical-align:middle;"><span style="color:#3b7a2a; font-size:1.4rem;">&#10003;</span></td>
+                <td class="has-text-centered" style="vertical-align:middle;"><span style="color:#b01e1e; font-size:1.4rem;">&#10007;</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-12">
+          <div class="content has-text-justified">
+            <h3 class="title is-4">Diving deeper with multi-turn evaluation</h3>
+            <p>Multi-turn conversations pose an additional challenge because each response depends on the dialogue state established by previous turns. <span style="background-color: #f8f7a6">Single-turn QA evaluations alone cannot capture failures in context tracking, referent resolution, consistency, or error accumulation across a conversation.</span> We therefore evaluate every Talker on the Everyday Conversations dataset and on the task-oriented MultiWOZ dataset.</p>
+            <table class="table is-striped" style="background-color:transparent; width:75%; margin-left:auto; margin-right:auto;">
+              <thead>
+                <tr>
+                  <th rowspan="2" style="vertical-align:bottom;">Model</th>
+                  <th colspan="3" class="has-text-centered">Everyday Conversations</th>
+                  <th colspan="3" class="has-text-centered">MultiWOZ</th>
+                </tr>
+                <tr>
+                  <th class="has-text-centered">Cov.</th><th class="has-text-centered">Faith.</th><th class="has-text-centered">Help.</th>
+                  <th class="has-text-centered">Cov.</th><th class="has-text-centered">Faith.</th><th class="has-text-centered">Help.</th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>SmolLM2 135M</td>
+                <td class="has-text-centered">4.99</td><td class="has-text-centered">4.87</td><td class="has-text-centered">1.00</td>
+                <td class="has-text-centered">4.83</td><td class="has-text-centered">4.57</td><td class="has-text-centered">0.91</td>
+              </tr>
+              <tr>
+                <td>Gemma 3 270M</td>
+                <td class="has-text-centered">4.99</td><td class="has-text-centered">4.77</td><td class="has-text-centered">0.99</td>
+                <td class="has-text-centered">4.85</td><td class="has-text-centered">4.55</td><td class="has-text-centered">0.92</td>
+              </tr>
+              <tr>
+                <td>SmolLM2 360M</td>
+                <td class="has-text-centered">5.00</td><td class="has-text-centered">4.91</td><td class="has-text-centered">1.00</td>
+                <td class="has-text-centered">4.86</td><td class="has-text-centered">4.68</td><td class="has-text-centered">0.94</td>
+              </tr>
+              <tr>
+                <td>Qwen3 0.6B</td>
+                <td class="has-text-centered">5.00</td><td class="has-text-centered">4.88</td><td class="has-text-centered">1.00</td>
+                <td class="has-text-centered">4.90</td><td class="has-text-centered">4.74</td><td class="has-text-centered">0.94</td>
+              </tr>
+              <tr>
+                <td>Gemma 3 1B</td>
+                <td class="has-text-centered">5.00</td><td class="has-text-centered">4.91</td><td class="has-text-centered">1.00</td>
+                <td class="has-text-centered">4.85</td><td class="has-text-centered">4.52</td><td class="has-text-centered">0.92</td>
+              </tr>
+              <tr>
+                <td>Llama 3.2 1B</td>
+                <td class="has-text-centered">5.00</td><td class="has-text-centered">4.86</td><td class="has-text-centered">1.00</td>
+                <td class="has-text-centered">4.87</td><td class="has-text-centered">4.60</td><td class="has-text-centered">0.93</td>
+              </tr>
+              <tr>
+                <td>SmolLM2 1.7B</td>
+                <td class="has-text-centered">5.00</td><td class="has-text-centered">4.97</td><td class="has-text-centered">1.00</td>
+                <td class="has-text-centered">4.89</td><td class="has-text-centered">4.74</td><td class="has-text-centered">0.95</td>
+              </tr>
+              </tbody>
+            </table>
+            <p><span style="background-color: #f8f7a6">In MultiWOZ, we observe significant positive scaling trends for Coverage, Faithfulness, and Helpfulness</span>, indicating that larger Talker models are better able to use Reasoner knowledge in longer, task-oriented dialogues. In contrast, no significant scaling trends emerge on Everyday Conversations. This divergence likely reflects the differing complexity of the two datasets and mirrors the single-turn contrast between SimpleQA and LLAMA1: scaling trends are most visible when the benchmark is challenging enough that model capability, rather than task saturation, limits performance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End beyond accuracy -->
+
+
+<!-- Latency -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">How fast do ConvFill Talkers respond?</h2>
+      <div class="columns">
+        <div class="column is-6 is-flex is-align-items-center is-justify-content-center" style="display: flex; flex-direction: column; justify-content: center;">
+          <div class="content has-text-justified">
+            <p>Rather than judging perceived quality from static transcripts or recordings, <span style="background-color: #f8f7a6">we built a full end-to-end, interactive ConvFill prototype so that users could talk to it directly</span>. We compared three configurations: a <b>Base SLM</b> and a <b>Frontier</b> model, each prompted for conversational interaction, and the full <b>ConvFill</b> system, in which a fine-tuned Talker generated the user-facing response while receiving streamed knowledge from a Reasoner.</p>
+            <p><span style="background-color: #f8f7a6">Beyond standard chat (<b>Direct</b>), we tested two tasks that do not appear in our fine-tuning data</span>: <span style="background-color: #f8f7a6">retrieval-augmented generation</span> (<b>RAG</b>), where each model was connected to a database, and <span style="background-color: #f8f7a6">tool use</span> through the Model Context Protocol (<b>MCP</b>), where participants queried an email inbox.</p>
+            <p>We measured time-to-first-response (TTFR), the time from the user's transcribed message to the first full sentence that could be voiced by the TTS system. The Talker responded in 542 ms for Direct, 976 ms for RAG, and 478 ms for MCP, which was <b>7.4&times;, 9.2&times;, and 19.1&times;</b> faster than the Reasoner on average. The Reasoner's own TTFR varied widely, from 2,947 ms on Direct to 7,242 ms on MCP, because of context retrieval and tool calls, yet <span style="background-color: #f8f7a6">the Talker stayed consistently fast and emitted contextual fillers accordingly as the wait grew</span>. Compared to the Base SLM, the Talker was similar on Direct (542 ms vs. 617 ms) but much faster on RAG (976 ms vs. 3,812 ms), since ConvFill offloaded processing the retrieved context to the Reasoner, a benefit of the modular approach of the ConvFill system.</p>
+          </div>
+        </div>
+        <div class="column is-6">
+          <figure>
+            <img src="static/images/convfill-ttfr.png" alt="Time-to-first-response per task" style="max-width:90%; height:auto; display:block; margin-left:auto; margin-right:auto;">
+            <figcaption style="">Time-to-first-response (ms) for the Base SLM, Frontier Model, ConvFill Talker, and ConvFill Reasoner on Direct, RAG, and MCP tasks.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End latency -->
+
+
+<!-- User study -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Do people like talking to ConvFill?</h2>
+      <div class="columns is-centered">
+        <div class="column is-7">
+          <figure>
+            <img src="static/images/user_study.png" alt="User study rankings" style="max-width:85%; height:auto;">
+            <figcaption style="margin-right:20px;">Live user study (n=18) on Apple M2 hardware: first-place rankings for ConvFill vs. a frontier model on Direct, RAG, and MCP tasks (TODO: add figure).</figcaption>
+          </figure>
+        </div>
+        <div class="column is-5 is-flex is-align-items-center is-justify-content-center" style="display: flex; flex-direction: column; justify-content: center;">
+          <div class="content">
+            <p>Participants ranked ConvFill <span style="background-color: #e6d2fa">on par with frontier models overall</span>, and rated it more responsive (latency <b>4.24 &plusmn; 0.85</b> vs. <b>3.46 &plusmn; 1.28</b>).</p>
+            <p>ConvFill was ranked first by 8 of 18 participants on direct tasks (frontier: 10), 11 on MCP tasks (frontier: 7), and <span style="background-color: #f8f7a6">12 on retrieval (RAG) tasks (frontier: 5)</span>, a statistically significant preference.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End user study -->
+
+
+<!-- Paper poster -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">Poster</h2>
+
+      <iframe  src="static/pdfs/ConvFill%20EMNLP%20Poster.pdf" title="ConvFill EMNLP Poster" width="100%" height="830"></iframe>
+
+      </div>
+    </div>
+  </section>
+<!--End paper poster -->
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@misc{srinivas2025thinkingwhilespeaking,
+        title={Thinking While Speaking: Inference-Time Knowledge Transfer for Responsive and Intelligent Conversational Voice Agents},
+        author={Srinivas, Vidya and Englhardt, Zachary and Iyer, Vikram and Patel, Shwetak},
+        year={2025},
+        eprint={2511.07397},
+        archivePrefix={arXiv},
+        primaryClass={cs.CL}
+      }</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+  </html>
