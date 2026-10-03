@@ -577,18 +577,19 @@ End teaser video -->
   <div class="hero-body">
     <div class="container">
       <h2 class="title is-3">Do people like talking to ConvFill?</h2>
-      <div class="columns is-centered">
-        <div class="column is-7">
-          <figure>
-            <img src="static/images/user_study.png" alt="User study rankings" style="max-width:85%; height:auto;">
-            <figcaption style="margin-right:20px;">Live user study (n=18) on Apple M2 hardware: first-place rankings for ConvFill vs. a frontier model on Direct, RAG, and MCP tasks (TODO: add figure).</figcaption>
-          </figure>
-        </div>
-        <div class="column is-5 is-flex is-align-items-center is-justify-content-center" style="display: flex; flex-direction: column; justify-content: center;">
-          <div class="content">
-            <p>Participants ranked ConvFill <span style="background-color: #e6d2fa">on par with frontier models overall</span>, and rated it more responsive (latency <b>4.24 &plusmn; 0.85</b> vs. <b>3.46 &plusmn; 1.28</b>).</p>
-            <p>ConvFill was ranked first by 8 of 18 participants on direct tasks (frontier: 10), 11 on MCP tasks (frontier: 7), and <span style="background-color: #f8f7a6">12 on retrieval (RAG) tasks (frontier: 5)</span>, a statistically significant preference.</p>
+      <div class="columns">
+        <div class="column is-6 is-flex is-align-items-center is-justify-content-center" style="display: flex; flex-direction: column; justify-content: center;">
+          <div class="content has-text-justified">
+            <p>Users ranked each of the three systems on each task. <span style="background-color: #f8f7a6">In aggregate, ConvFill was ranked on par with the Frontier configuration on Direct and MCP tasks and was preferred outright on RAG tasks</span>, suggesting that better responsiveness is preferable,
+            even at the cost of some naturalness.  </p>
+            <p>The naturalness&ndash;responsiveness tradeoff suggests that simply filling every moment of silence with infill may not be optimal. A future ConvFill system could instead anticipate how long the Reasoner is likely to take: when a fast response is expected, it could hold off on non-grounded infill and briefly wait to answer from Reasoner knowledge, and for longer delays it could pause when the filler indicates one (e.g., &ldquo;Let me take a moment to check your inbox&hellip;&rdquo;) rather than sustaining constant filler. Tuning infill to context and expected latency could preserve the responsiveness users value while recovering the naturalness that excess filler can cost.</p>
           </div>
+        </div>
+        <div class="column is-6">
+          <figure>
+            <img src="static/images/convfill-rankings.png" alt="User study rankings" style="max-width:90%; height:auto; display:block; margin-left:auto; margin-right:auto;">
+            <figcaption>Number of participants (n=18) who ranked each system 1st, 2nd, or 3rd on the Direct, RAG, and MCP tasks.</figcaption>
+          </figure>
         </div>
       </div>
     </div>
@@ -615,13 +616,14 @@ End teaser video -->
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
-      <pre><code>@misc{srinivas2025thinkingwhilespeaking,
+      <pre><code>@misc{srinivas2026thinkingspeakinginferencetimeknowledge,
         title={Thinking While Speaking: Inference-Time Knowledge Transfer for Responsive and Intelligent Conversational Voice Agents},
-        author={Srinivas, Vidya and Englhardt, Zachary and Iyer, Vikram and Patel, Shwetak},
-        year={2025},
+        author={Vidya Srinivas and Zachary Englhardt and Vikram Iyer and Shwetak Patel},
+        year={2026},
         eprint={2511.07397},
         archivePrefix={arXiv},
-        primaryClass={cs.CL}
+        primaryClass={cs.CL},
+        url={https://arxiv.org/abs/2511.07397},
       }</code></pre>
     </div>
 </section>
