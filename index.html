@@ -216,7 +216,7 @@ End teaser video -->
     <div class="container">
       <h2 class="title is-3">Reasoner: the knowledge source</h2>
       <div class="columns is-centered">
-        <div class="column is-8">
+        <div class="column is-10">
           <figure>
             <img src="static/images/reasoner-knowledge-source.png" alt="Reasoner inputs and outputs" style="max-width:100%; height:auto;">
             <figcaption style="margin-left:0px; margin-right:2px">The Reasoner (a frontier model) sees the full conversation transcript and the latest user utterance, can call tools, the web, and data sources, and pushes knowledge chunks into the knowledge queue.</figcaption>
@@ -243,7 +243,7 @@ End teaser video -->
     <div class="container">
       <h2 class="title is-3">Talker: dynamic information incorporation</h2>
       <div class="columns is-centered">
-        <div class="column is-8">
+        <div class="column is-10">
           <figure>
             <img src="static/images/talker-dynamic-info.png" alt="Talker inputs and outputs" style="max-width:100%; height:auto;">
             <figcaption style="margin-left:0px; margin-right:2px">The Talker takes a lookback of the last &#8467; turns, the user utterance, its previous phrases this turn, and either Reasoner knowledge or a silence token (&lt;sil&gt;). On &lt;sil&gt; it produces a contextual conversational filler phrase; otherwise it produces a Reasoner-conditioned phrase.</figcaption>
@@ -272,7 +272,7 @@ End teaser video -->
     <div class="container">
       <h2 class="title is-3">The ConvFill architecture: putting it all together</h2>
       <div class="columns is-centered">
-        <div class="column is-8">
+        <div class="column is-10">
           <figure>
             <img src="static/images/convfill-architecture.png" alt="ConvFill system architecture" style="max-width:100%; height:auto;">
             <figcaption style="margin-left:0px; margin-right:2px">User speech is transcribed (STT) and sent to both the Talker and the Reasoner. (1) The Reasoner pushes knowledge into the knowledge queue; the Talker reads a &lt;sil&gt; token or a knowledge chunk from it. (2) The Talker writes filler and Reasoner-conditioned phrases to the TTS queue, which are spoken as system speech.</figcaption>
@@ -309,7 +309,7 @@ End teaser video -->
         </div>
       </div>
       <div class="columns is-centered" style="margin-top:-1.25rem;">
-        <div class="column is-8">
+        <div class="column is-10">
           <figure>
             <img src="static/images/initial-seed-data.png" alt="Initial data seed stage: conversational topic seeds, persona-scenario pairs, and the DSTC8 train split" style="max-width:100%; height:auto;">
             <figcaption style="margin-left:0px; margin-right:2px">The initial data seed stage draws on three sources: conversational topic seeds (advice, assistant, planning), &lt;persona, scenario&gt; pairs (customer service, education, medical), and the DSTC8 train split of goal-directed, slot-filling utterances.</figcaption>
@@ -328,7 +328,7 @@ End teaser video -->
         </div>
       </div>
       <div class="columns is-centered">
-        <div class="column is-10">
+        <div class="column is-12">
           <figure>
             <img src="static/images/data-generation-pipeline.png" alt="ConvFill data generation pipeline: seed stage, four validation stages, JSON output" style="max-width:100%; height:auto;">
             <figcaption style="margin-left:0px; margin-right:2px">The full ConvFill data generation pipeline. Candidate conversations must pass all four validation stages before being written out as JSON with paired Reasoner and Talker fields.</figcaption>
@@ -385,9 +385,9 @@ End teaser video -->
     <div class="container">
       <h2 class="title is-3">Our Talker and Reasoner configurations</h2>
       <div class="columns is-centered">
-        <div class="column is-7">
+        <div class="column is-7" style="display: flex; flex-direction: column; justify-content: center;">
           <figure>
-            <img src="static/images/convfill-configurations.png" alt="Seven fine-tuned Talker models, three prompted Reasoner models, and 21 ConvFill configurations across 4 Talker and 3 Reasoner families" style="max-width:85%; height:auto;">
+            <img src="static/images/convfill-configurations.png" alt="Seven fine-tuned Talker models, three prompted Reasoner models, and 21 ConvFill configurations across 4 Talker and 3 Reasoner families" style="max-width:100%; height:auto;">
           </figure>
         </div>
         <div class="column is-5 is-flex is-align-items-center is-justify-content-center" style="display: flex; flex-direction: column; justify-content: center;">
@@ -412,7 +412,7 @@ End teaser video -->
       <div class="columns is-centered">
         <div class="column is-7">
           <figure>
-            <img src="static/images/convfill-singleturn-qa-results.png" alt="Single-turn QA accuracy of seven Talker models on LLAMA1 and SimpleQA with Claude Opus 4.7, GPT-5.5, and Gemini 3.1 Pro as Reasoners" style="max-width:85%; height:auto;">
+            <img src="static/images/convfill-singleturn-qa-results.png" alt="Single-turn QA accuracy of seven Talker models on LLAMA1 and SimpleQA with Claude Opus 4.7, GPT-5.5, and Gemini 3.1 Pro as Reasoners" style="max-width:100%; height:auto;">
             <figcaption style="margin-right:20px;">Single-turn QA accuracy on LLAMA1 and SimpleQA for seven Talker models, with Claude Opus 4.7, GPT-5.5, and Gemini 3.1 Pro as the Reasoner backends. Blue bars show the base SLM performance alone. Gray bars show the additional performance boost by ConvFill Talkers over their respective Base SLMs. Horizontal blue lines mark the Frontier Model performance alone, agnostic of ConvFill. Red dashed lines represent the performance of the ConvFill Reasoners, prompted for the ConvFill task. Error bars show 95% confidence intervals.</figcaption>
           </figure>
         </div>
