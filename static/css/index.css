@@ -155,3 +155,11 @@ figcaption {
     white-space: nowrap;
   }
 }
+
+@media screen and (min-width: 769px) {
+  .container,
+  .container.is-max-desktop {
+    width: 80%;
+    max-width: none;
+  }
+}
