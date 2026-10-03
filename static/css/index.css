@@ -149,3 +149,9 @@ figcaption {
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
+
+@media screen and (min-width: 769px) {
+  .news-list {
+    white-space: nowrap;
+  }
+}
